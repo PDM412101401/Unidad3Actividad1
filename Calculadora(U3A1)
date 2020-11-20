@@ -1,0 +1,205 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(
+    home: CalculatorApp(),
+  ));
+}
+
+class CalculatorApp extends StatefulWidget {
+  @override
+  CalculatorAppState createState() => CalculatorAppState();
+}
+
+class CalculatorAppState extends State<CalculatorApp> {
+  double operand1 = 0.0;
+  double operand2 = 0.0;
+  String operation;
+  String calculation = "0";
+
+  void onPressButton(String text) {
+    print(text);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Card(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Padding(
+                padding: EdgeInsets.all(16),
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Text(calculation, style: TextStyle(fontSize: 30)),
+                )),
+            Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  ComponenteBotonNum(text: "7", callback: (){
+                    onPressButton("7");
+                  }),
+                  ComponenteBotonNum(text: "8", callback: (){
+                    onPressButton("8");
+                  }),
+                  ComponenteBotonNum(text: "9", callback: (){
+                    onPressButton("9");
+                  }), 
+                  ComponenteBoton(text: "%", callback: (){
+                    onPressButton("%");
+                  }),
+                ]),
+            Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  ComponenteBotonNum(text: "4", callback: (){
+                    onPressButton("4");
+                  }),
+                  ComponenteBotonNum(text: "5", callback: (){
+                    onPressButton("5");
+                  }),
+                  ComponenteBotonNum(text: "6", callback: (){
+                    onPressButton("6");
+                  }), 
+                  ComponenteBoton(text: "*", callback: (){
+                    onPressButton("*");
+                  }),
+                ]),
+            Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  ComponenteBotonNum(text: "1", callback: (){
+                    onPressButton("1");
+                  }),
+                  ComponenteBotonNum(text: "2", callback: (){
+                    onPressButton("2");
+                  }),
+                  ComponenteBotonNum(text: "3", callback: (){
+                    onPressButton("3");
+                  }), 
+                  ComponenteBoton(text: "+", callback: (){
+                    onPressButton("+");
+                  }),
+                ]),
+            Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  ComponenteBotonNum(text: "0", callback: (){
+                    onPressButton("0");
+                  }),
+                  ComponenteBotonRes(text: "=", callback: (){
+                    onPressButton("=");
+                  }),
+                  ComponenteBotonBorrar(text: "C", callback: (){
+                    onPressButton("C");
+                  }), 
+                  ComponenteBoton(text: "-", callback: (){
+                    onPressButton("-");
+                  }),
+                ]),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ComponenteBoton extends StatelessWidget {
+  final Function callback;
+  final String text;
+  //Este es el constructor del componente.
+  //Recibe dos parámetros, text y callback
+  //Para saber más al respecto https://dart.dev/guides/language/language-tour#constructors
+  const ComponenteBoton({Key key,@required this.text, @required this.callback}): super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return
+      Container(
+          padding: EdgeInsets.all(2.0),
+          child: RaisedButton(
+            child: Text(
+              //Este es el parámetro text
+              this.text,
+              style: TextStyle(color: Colors.white),
+            ),
+            color: Colors.black,
+            //Este es el parámetro callback
+            onPressed: callback,
+          ));    
+  }
+}
+class ComponenteBotonNum extends StatelessWidget {
+  final Function callback;
+  final String text;
+  //Este es el constructor del componente.
+  //Recibe dos parámetros, text y callback
+  //Para saber más al respecto https://dart.dev/guides/language/language-tour#constructors
+  const ComponenteBotonNum({Key key,@required this.text, @required this.callback}): super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return
+      Container(
+          padding: EdgeInsets.all(2.0),
+          child: RaisedButton(
+            child: Text(
+              //Este es el parámetro text
+              this.text,
+              style: TextStyle(color: Colors.white),
+            ),
+            color: Colors.red,
+            //Este es el parámetro callback
+            onPressed: callback,
+          ));    
+  }
+}
+
+class ComponenteBotonRes extends StatelessWidget {
+  final Function callback;
+  final String text;
+  //Este es el constructor del componente.
+  //Recibe dos parámetros, text y callback
+  //Para saber más al respecto https://dart.dev/guides/language/language-tour#constructors
+  const ComponenteBotonRes({Key key,@required this.text, @required this.callback}): super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return
+      Container(
+          padding: EdgeInsets.all(2.0),
+          child: RaisedButton(
+            child: Text(
+              //Este es el parámetro text
+              this.text,
+              style: TextStyle(color: Colors.black),
+            ),
+            color: Colors.white,
+            //Este es el parámetro callback
+            onPressed: callback,
+          ));    
+  }
+}
+
+class ComponenteBotonBorrar extends StatelessWidget {
+  final Function callback;
+  final String text;
+  //Este es el constructor del componente.
+  //Recibe dos parámetros, text y callback
+  //Para saber más al respecto https://dart.dev/guides/language/language-tour#constructors
+  const ComponenteBotonBorrar({Key key,@required this.text, @required this.callback}): super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return
+      Container(
+          padding: EdgeInsets.all(2.0),
+          child: RaisedButton(
+            child: Text(
+              //Este es el parámetro text
+              this.text,
+              style: TextStyle(color: Colors.white),
+            ),
+            color: Colors.green,
+            //Este es el parámetro callback
+            onPressed: callback,
+          ));    
+  }
+}
